@@ -84,9 +84,9 @@ local SUB_IDX = {
 
 --======= TAB =======--
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
-	local edge_background = theme.tab_bar.background -- tab gap background
-	local background = theme.tab_bar.inactive_tab.bg_color -- inactive tab background
-	local foreground = theme.tab_bar.inactive_tab.fg_color -- inactive tab font color
+	local edge_background = theme.tab_bar.background          -- tab gap background
+	local background = theme.tab_bar.inactive_tab.bg_color    -- inactive tab background
+	local foreground = theme.tab_bar.inactive_tab.fg_color    -- inactive tab font color
 	local dim_foreground = theme.tab_bar.inactive_tab.fg_color -- tab upper right corner tips color
 
 	if tab.is_active then
@@ -195,8 +195,6 @@ return {
 
 	font_dirs = { "fonts" },
 	font_size = 12,
-	enable_rounded_corners = false,
-	enable_italic = false,
 	freetype_load_target = "Normal",
 	font = wezterm.font_with_fallback({
 		"JetBrainsMonoNL Nerd Font Mono",
@@ -256,10 +254,10 @@ return {
 			action = wezterm.action.CloseCurrentPane({ confirm = false }),
 		},
 		-- 调整窗格大小
-		{ key = "h", mods = "ALT|SHIFT", action = wezterm.action.AdjustPaneSize({ "Left", 1 }) },
-		{ key = "l", mods = "ALT|SHIFT", action = wezterm.action.AdjustPaneSize({ "Right", 1 }) },
-		{ key = "k", mods = "ALT|SHIFT", action = wezterm.action.AdjustPaneSize({ "Up", 1 }) },
-		{ key = "j", mods = "ALT|SHIFT", action = wezterm.action.AdjustPaneSize({ "Down", 1 }) },
+		{ key = "h", mods = "ALT|SHIFT",   action = wezterm.action.AdjustPaneSize({ "Left", 1 }) },
+		{ key = "l", mods = "ALT|SHIFT",   action = wezterm.action.AdjustPaneSize({ "Right", 1 }) },
+		{ key = "k", mods = "ALT|SHIFT",   action = wezterm.action.AdjustPaneSize({ "Up", 1 }) },
+		{ key = "j", mods = "ALT|SHIFT",   action = wezterm.action.AdjustPaneSize({ "Down", 1 }) },
 		-- 切换窗格
 		{ key = "h", mods = "LEADER|CTRL", action = wezterm.action.ActivatePaneDirection("Left") },
 		{ key = "l", mods = "LEADER|CTRL", action = wezterm.action.ActivatePaneDirection("Right") },
@@ -268,7 +266,7 @@ return {
 
 		--- ====== 标签页 ====== ---
 		-- 新增 tab
-		{ key = "t", mods = "LEADER", action = wezterm.action.SpawnTab("CurrentPaneDomain") },
+		{ key = "t", mods = "LEADER",      action = wezterm.action.SpawnTab("CurrentPaneDomain") },
 		-- 关闭 tab
 		{
 			key = "w",
@@ -276,8 +274,8 @@ return {
 			action = wezterm.action.CloseCurrentPane({ confirm = false }),
 		},
 		-- 切换 tab
-		{ key = "h", mods = "LEADER|SHIFT", action = wezterm.action.ActivateTabRelative(-1) },
-		{ key = "l", mods = "LEADER|SHIFT", action = wezterm.action.ActivateTabRelative(1) },
+		{ key = "h",   mods = "LEADER|SHIFT",                   action = wezterm.action.ActivateTabRelative(-1) },
+		{ key = "l",   mods = "LEADER|SHIFT",                   action = wezterm.action.ActivateTabRelative(1) },
 
 		-- 切换全屏模式
 		{ key = "F11", action = wezterm.action.ToggleFullScreen },
