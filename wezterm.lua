@@ -37,6 +37,7 @@ local NODE_ICON = utf8.char(0xe74e)
 local DENO_ICON = utf8.char(0xe628)
 local LAMBDA_ICON = utf8.char(0xfb26)
 
+
 local SUP_IDX = {
 	"¹",
 	"²",
@@ -106,7 +107,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 	local exec_name = basename(process_name):gsub("%.exe$", "")
 	local title_with_icon
 
-	if exec_name == "nFu" then
+	if exec_name == "nu" then
 		title_with_icon = NU_ICON .. " NuShell"
 	elseif exec_name == "pwsh" then
 		title_with_icon = PS_ICON .. " PS"
@@ -121,7 +122,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 	elseif exec_name == "yori" then
 		title_with_icon = YORI_ICON .. " " .. pane_title:gsub(" %- Yori", "")
 	elseif exec_name == "nvim" then
-		title_with_icon = VIM_ICON .. pane_title:gsub("^(%S+)%s+(%d+/%d+) %- nvim", " %2 %1")
+		title_with_icon = VIM_ICON .. " NVIM"
 	elseif exec_name == "bat" or exec_name == "less" or exec_name == "moar" then
 		title_with_icon = PAGER_ICON .. " " .. exec_name:upper()
 	elseif exec_name == "fzf" or exec_name == "hs" or exec_name == "peco" then
@@ -173,6 +174,8 @@ return {
 		["THEME"] = theme,
 	},
 	color_scheme = "THEME",
+	initial_rows = 40,
+	initial_cols = 120,
 	window_padding = {
 		left = 5,
 		right = 5,
@@ -182,7 +185,7 @@ return {
 	default_cursor_style = "BlinkingBar",
 	window_decorations = "RESIZE",
 	window_close_confirmation = "NeverPrompt",
-	window_background_opacity = 0.9,
+	window_background_opacity = 0.95,
 	adjust_window_size_when_changing_font_size = false,
 	inactive_pane_hsb = {
 		saturation = 1,
@@ -194,7 +197,7 @@ return {
 	cursor_blink_ease_out = "EaseOut",
 
 	font_dirs = { "fonts" },
-	font_size = 12,
+	font_size = 11,
 	freetype_load_target = "Normal",
 	font = wezterm.font_with_fallback({
 		"JetBrainsMonoNL Nerd Font Mono",
