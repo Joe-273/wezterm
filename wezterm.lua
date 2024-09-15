@@ -50,26 +50,18 @@ local process_icon_map = {
 	pwsh = "󰨊 ",
 	cmd = " ",
 	wsl = " ",
-	wslhost = " ",
 	nvim = " ",
 	bat = "󰯂 ",
-	less = "󰯂 ",
-	moar = "󰯂 ",
 	fzf = " ",
-	hs = " ",
-	peco = " ",
 	btm = "󰓠 ",
-	ntop = "󰓠 ",
 	python = " ",
-	hiss = " ",
 	node = " ",
 	deno = " ",
 }
 
--- 用于保存当前的图标
-local current_icon = HOURGLASS_ICON
-
 --======= TAB =======--
+local tab_icons = {} -- 保存每个 tab 的 icon
+
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
 	local edge_background = theme.background
 	local background = theme.background
@@ -85,14 +77,45 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 
 	local edge_foreground = background
 	local process_name = tab.active_pane.foreground_process_name
+	local pane_title = tab.active_pane.title
 	local exec_name = basename(process_name):gsub("%.exe$", "")
-	-- 如果找到对应的图标，就更新 current_icon
-	if process_icon_map[exec_name] then
-		current_icon = process_icon_map[exec_name]
+	local title_with_icon
+
+	if exec_name == "nu" then
+		title_with_icon = process_icon_map.nu
+	elseif exec_name == "pwsh" then
+		title_with_icon = process_icon_map.pwsh
+	elseif exec_name == "cmd" then
+		title_with_icon = process_icon_map.cmd
+	elseif exec_name == "wsl" or exec_name == "wslhost" then
+		title_with_icon = process_icon_map.wsl
+	elseif exec_name == "nvim" then
+		title_with_icon = process_icon_map.nvim
+	elseif exec_name == "bat" or exec_name == "less" or exec_name == "moar" then
+		title_with_icon = process_icon_map.bat
+	elseif exec_name == "fzf" or exec_name == "hs" or exec_name == "peco" then
+		title_with_icon = process_icon_map.fzf
+	elseif exec_name == "btm" or exec_name == "ntop" then
+		title_with_icon = process_icon_map.btm
+	elseif exec_name == "python" or exec_name == "hiss" then
+		title_with_icon = process_icon_map.python
+	elseif exec_name == "node" then
+		title_with_icon = process_icon_map.node
+	elseif exec_name == "deno" then
+		title_with_icon = process_icon_map.deno
+	else
+		if tab_icons[tab.tab_id] == nil then
+			title_with_icon = HOURGLASS_ICON
+		else
+			title_with_icon = tab_icons[tab.tab_id]
+		end
 	end
-	local title_with_icon = current_icon
-	-- 如果是管理员窗口，添加管理员图标
-	if tab.active_pane.title:match("^Administrator: ") then
+
+	-- 运行到这里，进程的 icon 已经存在
+	-- 将 icon 保存
+	tab_icons[tab.tab_id] = title_with_icon
+
+	if pane_title:match("^Administrator: ") then
 		title_with_icon = title_with_icon .. " " .. ADMIN_ICON
 	end
 
@@ -223,10 +246,10 @@ return {
 			action = wezterm.action.CloseCurrentPane({ confirm = false }),
 		},
 		-- 调整窗格大小
-		{ key = "h", mods = "ALT|SHIFT",   action = wezterm.action.AdjustPaneSize({ "Left", 1 }) },
-		{ key = "l", mods = "ALT|SHIFT",   action = wezterm.action.AdjustPaneSize({ "Right", 1 }) },
-		{ key = "k", mods = "ALT|SHIFT",   action = wezterm.action.AdjustPaneSize({ "Up", 1 }) },
-		{ key = "j", mods = "ALT|SHIFT",   action = wezterm.action.AdjustPaneSize({ "Down", 1 }) },
+		{ key = "h", mods = "ALT|SHIFT", action = wezterm.action.AdjustPaneSize({ "Left", 1 }) },
+		{ key = "l", mods = "ALT|SHIFT", action = wezterm.action.AdjustPaneSize({ "Right", 1 }) },
+		{ key = "k", mods = "ALT|SHIFT", action = wezterm.action.AdjustPaneSize({ "Up", 1 }) },
+		{ key = "j", mods = "ALT|SHIFT", action = wezterm.action.AdjustPaneSize({ "Down", 1 }) },
 		-- 切换窗格
 		{ key = "h", mods = "LEADER|CTRL", action = wezterm.action.ActivatePaneDirection("Left") },
 		{ key = "l", mods = "LEADER|CTRL", action = wezterm.action.ActivatePaneDirection("Right") },
@@ -235,7 +258,7 @@ return {
 
 		--- ====== 标签页 ====== ---
 		-- 新增 tab
-		{ key = "t", mods = "LEADER",      action = wezterm.action.SpawnTab("CurrentPaneDomain") },
+		{ key = "t", mods = "LEADER", action = wezterm.action.SpawnTab("CurrentPaneDomain") },
 		-- 关闭 tab
 		{
 			key = "w",
