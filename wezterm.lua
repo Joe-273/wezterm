@@ -46,7 +46,7 @@ local SUB_IDX = {
 
 -- 映射表，包含进程名和对应的图标
 local process_icon_map = {
-	nu = " ",
+	nu = " ",
 	pwsh = "󰨊 ",
 	cmd = " ",
 	wsl = " ",
@@ -129,6 +129,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 
 	return {
 		{ Attribute = { Intensity = "Bold" } },
+		{ Attribute = { Italic = false } },
 		{ Background = { Color = edge_background } },
 		{ Foreground = { Color = edge_foreground } },
 		{ Text = left_arrow },
@@ -141,7 +142,6 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 		{ Background = { Color = edge_background } },
 		{ Foreground = { Color = edge_foreground } },
 		{ Text = SOLID_RIGHT_ARROW .. " " },
-		{ Attribute = { Intensity = "Normal" } },
 	}
 end)
 
@@ -161,7 +161,7 @@ local weztermConfig = {
 	default_cursor_style = "BlinkingBar",
 	window_decorations = "RESIZE",
 	window_close_confirmation = "NeverPrompt",
-	window_background_opacity = 0.93,
+	window_background_opacity = 0.92,
 	adjust_window_size_when_changing_font_size = false,
 	inactive_pane_hsb = {
 		saturation = 1,
@@ -192,7 +192,7 @@ local weztermConfig = {
 	},
 	tab_max_width = 60,
 	use_fancy_tab_bar = false,
-	default_prog = { "pwsh.exe" }, -- default shell
+	default_prog = { "nu.exe" }, -- default shell
 	set_environment_variables = {
 		LANG = "en_US.UTF-8",
 		PATH = wezterm.executable_dir .. ";" .. os.getenv("PATH"),
@@ -211,6 +211,11 @@ local weztermConfig = {
 				bg_color = theme.background,
 				fg_color = theme.cursor_bg,
 				intensity = "Bold",
+			},
+			inactive_tab_hover = {
+				bg_color = theme.background,
+				fg_color = theme.cursor_bg,
+				italic = false,
 			},
 		},
 	},
