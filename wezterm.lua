@@ -3,7 +3,7 @@ local keybindings = require("keymapping")
 
 --====== THEME ======--
 -- change the theme here
-local theme = wezterm.color.get_builtin_schemes()["Google (dark) (terminal.sexy)"]
+local theme = wezterm.color.get_builtin_schemes()["Twilight (base16)"]
 
 -- Equivalent to POSIX basename(3)
 local function basename(s)
@@ -31,17 +31,6 @@ local SUP_IDX = {
 	"⁷",
 	"⁸",
 	"⁹",
-}
-local SUB_IDX = {
-	"₁",
-	"₂",
-	"₃",
-	"₄",
-	"₅",
-	"₆",
-	"₇",
-	"₈",
-	"₉",
 }
 
 -- 映射表，包含进程名和对应的图标
@@ -110,21 +99,20 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 		end
 	end
 
-	-- 运行到这里，进程的 icon 已经存在
-	-- 将 icon 保存
-	tab_icons[tab.tab_id] = title_with_icon
-
 	if pane_title:match("^Administrator: ") then
 		title_with_icon = title_with_icon .. " " .. ADMIN_ICON
 	end
+
+	-- 运行到这里，进程的 icon 已经存在
+	-- 将 icon 保存
+	tab_icons[tab.tab_id] = title_with_icon
 
 	local left_arrow = SOLID_LEFT_ARROW
 	if tab.tab_index == 0 then
 		left_arrow = SOLID_LEFT_MOST
 	end
 
-	local id = SUB_IDX[tab.tab_index + 1]
-	local pid = SUP_IDX[tab.active_pane.pane_index + 1]
+	local id = SUP_IDX[tab.tab_index + 1]
 	local title = " " .. wezterm.truncate_right(title_with_icon, max_width - 6) .. " "
 
 	return {
@@ -135,23 +123,23 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 		{ Text = left_arrow },
 		{ Background = { Color = background } },
 		{ Foreground = { Color = foreground } },
-		{ Text = id },
 		{ Text = title },
 		{ Foreground = { Color = foreground } },
-		{ Text = pid },
+		{ Text = id },
 		{ Background = { Color = edge_background } },
 		{ Foreground = { Color = edge_foreground } },
 		{ Text = SOLID_RIGHT_ARROW .. " " },
 	}
 end)
 
-local weztermConfig = {
+local config = {
 	color_schemes = {
 		["THEME"] = theme,
 	},
 	color_scheme = "THEME",
-	initial_rows = 40,
-	initial_cols = 120,
+	-- window size
+	initial_rows = 50,
+	initial_cols = 140,
 	window_padding = {
 		left = 0,
 		right = 0,
@@ -161,12 +149,13 @@ local weztermConfig = {
 	default_cursor_style = "BlinkingBar",
 	window_decorations = "RESIZE",
 	window_close_confirmation = "NeverPrompt",
-	window_background_opacity = 0.92,
+	warn_about_missing_glyphs = false,
+	-- window_background_opacity = 0.92,
 	adjust_window_size_when_changing_font_size = false,
-	inactive_pane_hsb = {
+	--[[ inactive_pane_hsb = {
 		saturation = 1,
 		brightness = 0.6,
-	},
+	}, ]]
 	-- animation_fps
 	animation_fps = 60,
 	cursor_blink_ease_in = "EaseIn",
@@ -179,17 +168,6 @@ local weztermConfig = {
 		"JetBrainsMonoNL Nerd Font", -- 正常字体
 		"微软雅黑", -- 保留中文字体
 	}),
-	font_rules = {
-		{
-			-- 斜体时使用 Italic 字体
-			italic = true,
-			font = wezterm.font_with_fallback({
-				"Monaspace Radon", -- 斜体字体
-				"微软雅黑", -- 保留中文字体
-				"JetBrainsMono Nerd Font", -- 保留图标字体
-			}, { italic = true }),
-		},
-	},
 	tab_max_width = 60,
 	use_fancy_tab_bar = false,
 	default_prog = { "nu.exe" }, -- default shell
@@ -233,4 +211,4 @@ local weztermConfig = {
 	keys = keybindings,
 }
 
-return weztermConfig
+return config
