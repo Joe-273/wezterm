@@ -1,9 +1,8 @@
 local wezterm = require("wezterm")
 local keybindings = require("keymapping")
-
 --====== THEME ======--
 -- change the theme here
-local theme = wezterm.color.get_builtin_schemes()["Twilight (base16)"]
+local theme = wezterm.color.get_builtin_schemes()["Horizon Dark (base16)"]
 
 -- Equivalent to POSIX basename(3)
 local function basename(s)
@@ -103,8 +102,6 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 		title_with_icon = title_with_icon .. " " .. ADMIN_ICON
 	end
 
-	-- 运行到这里，进程的 icon 已经存在
-	-- 将 icon 保存
 	tab_icons[tab.tab_id] = title_with_icon
 
 	local left_arrow = SOLID_LEFT_ARROW
@@ -117,7 +114,6 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 
 	return {
 		{ Attribute = { Intensity = "Bold" } },
-		{ Attribute = { Italic = false } },
 		{ Background = { Color = edge_background } },
 		{ Foreground = { Color = edge_foreground } },
 		{ Text = left_arrow },
@@ -149,32 +145,22 @@ local config = {
 	default_cursor_style = "BlinkingBar",
 	window_decorations = "RESIZE",
 	window_close_confirmation = "NeverPrompt",
-	warn_about_missing_glyphs = false,
-	-- window_background_opacity = 0.92,
+	front_end = "OpenGL",
+	use_fancy_tab_bar = false,
+	window_background_opacity = 0.65,
+	win32_system_backdrop = "Acrylic",
 	adjust_window_size_when_changing_font_size = false,
-	--[[ inactive_pane_hsb = {
-		saturation = 1,
-		brightness = 0.6,
-	}, ]]
+	warn_about_missing_glyphs = false,
 	-- animation_fps
 	animation_fps = 60,
 	cursor_blink_ease_in = "EaseIn",
 	cursor_blink_ease_out = "EaseOut",
-
-	font_dirs = { "fonts" },
-	freetype_load_target = "Normal",
-	font_size = 11,
+	font_size = 13,
 	font = wezterm.font_with_fallback({
 		"JetBrainsMonoNL Nerd Font", -- 正常字体
 		"微软雅黑", -- 保留中文字体
 	}),
-	tab_max_width = 60,
-	use_fancy_tab_bar = false,
 	default_prog = { "nu.exe" }, -- default shell
-	set_environment_variables = {
-		LANG = "en_US.UTF-8",
-		PATH = wezterm.executable_dir .. ";" .. os.getenv("PATH"),
-	},
 
 	-- tab bar background color (without exiting tabs)
 	colors = {
@@ -196,12 +182,6 @@ local config = {
 				italic = false,
 			},
 		},
-	},
-
-	visual_bell = {
-		fade_in_duration_ms = 75,
-		fade_out_duration_ms = 75,
-		target = "CursorColor",
 	},
 
 	-- keymap config --
