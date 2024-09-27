@@ -134,8 +134,8 @@ local config = {
 	},
 	color_scheme = "THEME",
 	-- window size
-	initial_rows = 50,
-	initial_cols = 140,
+	initial_rows = 55,
+	initial_cols = 90,
 	window_padding = {
 		left = 0,
 		right = 0,
@@ -147,7 +147,7 @@ local config = {
 	window_close_confirmation = "NeverPrompt",
 	front_end = "OpenGL",
 	use_fancy_tab_bar = false,
-	window_background_opacity = 0.65,
+	window_background_opacity = 0.6,
 	win32_system_backdrop = "Acrylic",
 	adjust_window_size_when_changing_font_size = false,
 	warn_about_missing_glyphs = false,
@@ -155,11 +155,26 @@ local config = {
 	animation_fps = 60,
 	cursor_blink_ease_in = "EaseIn",
 	cursor_blink_ease_out = "EaseOut",
-	font_size = 13,
+	font_size = 11.5,
+	foreground_text_hsb = {
+		hue = 1.0,
+		saturation = 1.0,
+		brightness = 1.0,
+	},
+	freetype_load_target = "Light",
+	freetype_render_target = "Normal",
 	font = wezterm.font_with_fallback({
 		"JetBrainsMonoNL Nerd Font", -- 正常字体
 		"微软雅黑", -- 保留中文字体
 	}),
+	font_rules = {
+		{
+			font = wezterm.font({
+				family = "JetBrainsMonoNL Nerd Font",
+				weight = "DemiBold",
+			}),
+		},
+	},
 	default_prog = { "nu.exe" }, -- default shell
 
 	-- tab bar background color (without exiting tabs)
