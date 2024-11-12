@@ -207,7 +207,7 @@ local config = {
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	config.default_prog = { "pwsh" }
 	config.win32_system_backdrop = "Acrylic"
-elseif wezterm.target_triple == "x86_64-apple-darwin" then
+elseif wezterm.target_triple == "aarch64-apple-darwin" then
 	config.default_prog = { "/bin/zsh" }
 	config.macos_window_background_blur = 20
 end
