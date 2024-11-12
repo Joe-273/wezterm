@@ -134,8 +134,8 @@ local config = {
 	},
 	color_scheme = "THEME",
 	-- window size
-	initial_rows = 55,
-	initial_cols = 90,
+	initial_rows = 65,
+	initial_cols = 110,
 	window_padding = {
 		left = 0,
 		right = 0,
@@ -148,14 +148,13 @@ local config = {
 	front_end = "OpenGL",
 	use_fancy_tab_bar = false,
 	window_background_opacity = 0.6,
-	win32_system_backdrop = "Acrylic",
 	adjust_window_size_when_changing_font_size = false,
 	warn_about_missing_glyphs = false,
 	-- animation_fps
 	animation_fps = 60,
 	cursor_blink_ease_in = "EaseIn",
 	cursor_blink_ease_out = "EaseOut",
-	font_size = 11.5,
+	font_size = 10,
 	foreground_text_hsb = {
 		hue = 1.0,
 		saturation = 1.0,
@@ -175,7 +174,6 @@ local config = {
 			}),
 		},
 	},
-	default_prog = { "nu.exe" }, -- default shell
 
 	-- tab bar background color (without exiting tabs)
 	colors = {
@@ -205,5 +203,13 @@ local config = {
 	leader = { key = " ", mods = "SHIFT", timeout_milliseconds = 2000 },
 	keys = keybindings,
 }
+
+if wezterm.target_triple == "x86_64-pc-windows-msvc" then
+	config.default_prog = { "pwsh" }
+	config.win32_system_backdrop = "Acrylic"
+elseif wezterm.target_triple == "x86_64-apple-darwin" then
+	config.default_prog = { "/bin/zsh" }
+	config.macos_window_background_blur = 20
+end
 
 return config
