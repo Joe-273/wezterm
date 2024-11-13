@@ -40,7 +40,12 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 	end
 
 	local process_name = tab.active_pane.foreground_process_name
-	local exec_name = basename(process_name):match("^(.-)%.%w+$")
+
+	local exec_name = basename(process_name)
+	if exec_name:match("%.%.") then
+		exec_name = exec_name:match("^(.-)%.%w+$")
+	end
+
 	local title_name = exec_name:sub(1, 1):upper() .. exec_name:sub(2)
 	local title_icon = get_icon(exec_name)
 
