@@ -48,7 +48,7 @@ local config = {
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	local win_config = require("win-conf")
 	config = merge_config(config, win_config)
-elseif wezterm.target_triple == "x86_64-apple-darwin" then
+elseif wezterm.target_triple == "aarch64-apple-darwin" then
 	local mac_config = require("mac-conf")
 	config = merge_config(config, mac_config)
 end
