@@ -1,3 +1,5 @@
+---@diagnostic disable: unused-local
+
 local wezterm = require("wezterm")
 
 local function basename(s)
