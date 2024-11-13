@@ -34,11 +34,7 @@ local config = {
 	color_scheme = "Horizon Dark (base16)",
 	window_background_opacity = 0.6,
 
-	-- Font
-	font_size = 10,
-
 	-- Keymap config
-	disable_default_key_bindings = true,
 	-- leader : <space>
 	leader = { key = " ", mods = "SHIFT", timeout_milliseconds = 2000 },
 	keys = require("keymapping"),

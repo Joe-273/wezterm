@@ -1,7 +1,14 @@
+local wezterm = require("wezterm")
+
 -- Configs for OSX only
 local mac_conf = {
-	default_prog = { "/bin/zsh" },
-	macos_window_background_blur = 20,
+	-- UI
+	macos_window_background_blur = 30,
+
+	-- Font
+	font = wezterm.font_with_fallback({
+		{ family = "JetBrainsMono Nerd Font", weight = "DemiBold" },
+	}),
 }
 
 return mac_conf

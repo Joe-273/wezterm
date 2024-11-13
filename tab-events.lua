@@ -42,7 +42,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 	local process_name = tab.active_pane.foreground_process_name
 
 	local exec_name = basename(process_name)
-	if exec_name:match("%.%.") then
+	if exec_name:match("%.%w+$") then
 		exec_name = exec_name:match("^(.-)%.%w+$")
 	end
 
