@@ -15,7 +15,7 @@ local config = {
 	front_end = "OpenGL",
 
 	-- Window size
-	initial_rows = 45,
+	initial_rows = 55,
 	initial_cols = 110,
 	window_padding = {
 		left = 0,
@@ -35,6 +35,7 @@ local config = {
 	window_background_opacity = 0.6,
 
 	-- Keymap config
+	disable_default_key_bindings = true,
 	-- leader : <space>
 	leader = { key = " ", mods = "SHIFT", timeout_milliseconds = 2000 },
 	keys = require("keymapping"),

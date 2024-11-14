@@ -2,10 +2,10 @@ local wezterm = require("wezterm")
 
 -- Configs for Windows only
 local win_conf = {
-	-- Shell
+	-- shell
 	default_prog = { "pwsh" },
 
-	-- UI
+	-- Ui
 	win32_system_backdrop = "Acrylic",
 
 	-- Font

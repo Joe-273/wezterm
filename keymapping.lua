@@ -1,6 +1,18 @@
 local wezterm = require("wezterm")
 
 local keys = {
+	-- ====== Copy/Paste ====== ---
+	-- Windows
+	{ key = "C", mods = "CTRL", action = wezterm.action.CopyTo("Clipboard") },
+	{ key = "V", mods = "CTRL", action = wezterm.action.PasteFrom("Clipboard") },
+	{ key = "Insert", mods = "", action = wezterm.action.CopyTo("Clipboard") },
+	{ key = "Insert", mods = "SHIFT", action = wezterm.action.PasteFrom("Clipboard") },
+	-- Mac
+	{ key = "C", mods = "CMD", action = wezterm.action.CopyTo("Clipboard") },
+	{ key = "V", mods = "CMD", action = wezterm.action.PasteFrom("Clipboard") },
+	{ key = "Insert", mods = "", action = wezterm.action.CopyTo("Clipboard") },
+	{ key = "Insert", mods = "SHIFT", action = wezterm.action.PasteFrom("Clipboard") },
+
 	--- ====== 窗格 ====== ---
 	-- 分割窗格
 	{
@@ -20,10 +32,10 @@ local keys = {
 		action = wezterm.action.CloseCurrentPane({ confirm = false }),
 	},
 	-- 调整窗格大小
-	{ key = "h", mods = "ALT|SHIFT",   action = wezterm.action.AdjustPaneSize({ "Left", 1 }) },
-	{ key = "l", mods = "ALT|SHIFT",   action = wezterm.action.AdjustPaneSize({ "Right", 1 }) },
-	{ key = "k", mods = "ALT|SHIFT",   action = wezterm.action.AdjustPaneSize({ "Up", 1 }) },
-	{ key = "j", mods = "ALT|SHIFT",   action = wezterm.action.AdjustPaneSize({ "Down", 1 }) },
+	{ key = "h", mods = "ALT|SHIFT", action = wezterm.action.AdjustPaneSize({ "Left", 1 }) },
+	{ key = "l", mods = "ALT|SHIFT", action = wezterm.action.AdjustPaneSize({ "Right", 1 }) },
+	{ key = "k", mods = "ALT|SHIFT", action = wezterm.action.AdjustPaneSize({ "Up", 1 }) },
+	{ key = "j", mods = "ALT|SHIFT", action = wezterm.action.AdjustPaneSize({ "Down", 1 }) },
 	-- 切换窗格
 	{ key = "h", mods = "LEADER|CTRL", action = wezterm.action.ActivatePaneDirection("Left") },
 	{ key = "l", mods = "LEADER|CTRL", action = wezterm.action.ActivatePaneDirection("Right") },
@@ -32,7 +44,7 @@ local keys = {
 
 	--- ====== 标签页 ====== ---
 	-- 新增 tab
-	{ key = "t", mods = "LEADER",      action = wezterm.action.SpawnTab("CurrentPaneDomain") },
+	{ key = "t", mods = "LEADER", action = wezterm.action.SpawnTab("CurrentPaneDomain") },
 	-- 关闭 tab
 	{
 		key = "w",
