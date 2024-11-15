@@ -24,6 +24,10 @@ local config = {
 		bottom = 0,
 	},
 
+	-- Font
+	line_height = 0.9,
+	freetype_load_target = "Light",
+
 	-- Cursor
 	default_cursor_style = "BlinkingBlock",
 	cursor_blink_ease_in = "Constant",

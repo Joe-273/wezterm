@@ -12,7 +12,7 @@ local win_conf = {
 	font_size = 10,
 	font = wezterm.font_with_fallback({
 		{ family = "JetBrainsMono Nerd Font", weight = "DemiBold" },
-		"微软雅黑",
+		{ family = "微软雅黑" },
 	}),
 }
 
