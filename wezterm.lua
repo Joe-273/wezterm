@@ -25,8 +25,8 @@ local config = {
 	},
 
 	-- Font
-	line_height = 0.9,
 	freetype_load_target = "Light",
+	freetype_render_target = "HorizontalLcd",
 
 	-- Cursor
 	default_cursor_style = "BlinkingBlock",
@@ -36,7 +36,7 @@ local config = {
 
 	-- Colorscheme
 	color_scheme = "Horizon Dark (base16)",
-	window_background_opacity = 0.6,
+	window_background_opacity = 0.5,
 
 	-- Keymap config
 	disable_default_key_bindings = true,
