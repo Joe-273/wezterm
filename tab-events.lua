@@ -33,11 +33,11 @@ local SUP_IDX = {
 }
 
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
-	local background = "#333333"
-	local foreground = "#999999"
+	local background = "#444444"
+	local foreground = "#888888"
 
 	if tab.is_active then
-		background = "#555555"
+		background = "#222222"
 		foreground = "#eeeeee"
 	end
 
