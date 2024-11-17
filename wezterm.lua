@@ -27,6 +27,11 @@ local config = {
 	-- Font
 	freetype_load_target = "Light",
 	freetype_render_target = "HorizontalLcd",
+	-- Primary font
+	font = wezterm.font_with_fallback({
+		{ family = "JetBrainsMono NF SemiBold" },
+		{ family = "黑体" },
+	}),
 
 	-- Cursor
 	default_cursor_style = "BlinkingBlock",

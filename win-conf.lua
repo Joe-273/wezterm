@@ -1,6 +1,7 @@
+-- [[ Configs for Windows only ]]
+
 local wezterm = require("wezterm")
 
--- Configs for Windows only
 local win_conf = {
 	-- shell
 	default_prog = { "pwsh" },
@@ -10,11 +11,56 @@ local win_conf = {
 
 	-- Font
 	font_size = 10,
-	font = wezterm.font_with_fallback({
-		{ family = "JetBrainsMono Nerd Font", weight = "DemiBold" },
-		{ family = "黑体" },
-	}),
-	font_rules = {},
+	font_rules = {
+		-- Bold-but-not-italic
+		{
+			intensity = "Bold",
+			italic = false,
+			font = wezterm.font({
+				family = "JetBrainsMono NF ExtraBold",
+			}),
+		},
+
+		-- Bold-and-italic
+		{
+			intensity = "Bold",
+			italic = true,
+			font = wezterm.font({
+				family = "Monaspace Radon",
+				italic = true,
+				weight = "Bold",
+			}),
+		},
+
+		-- normal-intensity-and-italic
+		{
+			intensity = "Normal",
+			italic = true,
+			font = wezterm.font({
+				family = "JetBrainsMono NF SemiBold",
+				italic = true,
+			}),
+		},
+
+		-- half-intensity-and-italic
+		{
+			intensity = "Half",
+			italic = true,
+			font = wezterm.font({
+				family = "JetBrainsMono NF",
+				italic = true,
+			}),
+		},
+
+		-- half-intensity-and-not-italic
+		{
+			intensity = "Half",
+			italic = false,
+			font = wezterm.font({
+				family = "JetBrainsMono NF",
+			}),
+		},
+	},
 }
 
 return win_conf
