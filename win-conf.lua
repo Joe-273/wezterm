@@ -6,18 +6,34 @@ local win_conf = {
 	-- shell
 	default_prog = { "pwsh" },
 
+	-- Window size
+	initial_rows = 55,
+	initial_cols = 110,
+	window_padding = {
+		left = 0,
+		right = 0,
+		top = 2,
+		bottom = 0,
+	},
+
 	-- Ui
 	win32_system_backdrop = "Acrylic",
 
 	-- Font
-	font_size = 10,
+	font_size = 12,
+	-- Primary font
+	font = wezterm.font_with_fallback({
+		{ family = "JetBrainsMono Nerd Font", weight = "DemiBold" },
+		{ family = "黑体" },
+	}),
 	font_rules = {
 		-- Bold-but-not-italic
 		{
 			intensity = "Bold",
 			italic = false,
-			font = wezterm.font({
-				family = "JetBrainsMono NF ExtraBold",
+			font = wezterm.font_with_fallback({
+				{ family = "JetBrainsMono Nerd Font", weight = "ExtraBold" },
+				{ family = "黑体" },
 			}),
 		},
 
@@ -25,10 +41,9 @@ local win_conf = {
 		{
 			intensity = "Bold",
 			italic = true,
-			font = wezterm.font({
-				family = "Monaspace Radon",
-				italic = true,
-				weight = "Bold",
+			font = wezterm.font_with_fallback({
+				{ family = "JetBrainsMono Nerd Font", weight = "ExtraBold", italic = true },
+				{ family = "黑体" },
 			}),
 		},
 
@@ -36,9 +51,9 @@ local win_conf = {
 		{
 			intensity = "Normal",
 			italic = true,
-			font = wezterm.font({
-				family = "JetBrainsMono NF SemiBold",
-				italic = true,
+			font = wezterm.font_with_fallback({
+				{ family = "JetBrainsMono Nerd Font", weight = "DemiBold", italic = true },
+				{ family = "黑体" },
 			}),
 		},
 
@@ -46,9 +61,9 @@ local win_conf = {
 		{
 			intensity = "Half",
 			italic = true,
-			font = wezterm.font({
-				family = "JetBrainsMono NF",
-				italic = true,
+			font = wezterm.font_with_fallback({
+				{ family = "JetBrainsMono Nerd Font", italic = true },
+				{ family = "黑体" },
 			}),
 		},
 
@@ -56,8 +71,9 @@ local win_conf = {
 		{
 			intensity = "Half",
 			italic = false,
-			font = wezterm.font({
-				family = "JetBrainsMono NF",
+			font = wezterm.font_with_fallback({
+				{ family = "JetBrainsMono Nerd Font" },
+				{ family = "黑体" },
 			}),
 		},
 	},

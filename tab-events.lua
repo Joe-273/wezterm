@@ -20,17 +20,7 @@ local function get_icon(exec_name)
 	end
 end
 
-local SUP_IDX = {
-	"¹",
-	"²",
-	"³",
-	"⁴",
-	"⁵",
-	"⁶",
-	"⁷",
-	"⁸",
-	"⁹",
-}
+local SUP_IDX = { "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹" }
 
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
 	local background = "#444444"

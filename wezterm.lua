@@ -14,24 +14,9 @@ local config = {
 	warn_about_missing_glyphs = false,
 	front_end = "OpenGL",
 
-	-- Window size
-	initial_rows = 55,
-	initial_cols = 110,
-	window_padding = {
-		left = 0,
-		right = 0,
-		top = 2,
-		bottom = 0,
-	},
-
 	-- Font
 	freetype_load_target = "Light",
 	freetype_render_target = "HorizontalLcd",
-	-- Primary font
-	font = wezterm.font_with_fallback({
-		{ family = "JetBrainsMono NF SemiBold" },
-		{ family = "黑体" },
-	}),
 
 	-- Cursor
 	default_cursor_style = "BlinkingBlock",
