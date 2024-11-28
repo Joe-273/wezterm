@@ -14,10 +14,6 @@ local config = {
 	warn_about_missing_glyphs = false,
 	front_end = "OpenGL",
 
-	-- Font
-	freetype_load_target = "Light",
-	freetype_render_target = "HorizontalLcd",
-
 	-- Cursor
 	default_cursor_style = "BlinkingBlock",
 	cursor_blink_ease_in = "Constant",
