@@ -1,46 +1,23 @@
-local function merge_config(t1, t2)
-	for k, v in pairs(t2) do
-		t1[k] = v
-	end
-	return t1
-end
-
 local wezterm = require("wezterm")
-local config = {
-	-- Window
+local utils = require("utils")
+local events = require("events")
+
+local font_config = require("font")
+local keys_config = require("keymaps")
+
+local base_config = {
+	-- 窗口
 	adjust_window_size_when_changing_font_size = false,
-	window_decorations = "INTEGRATED_BUTTONS | RESIZE",
+	window_decorations = "RESIZE | INTEGRATED_BUTTONS",
 	window_close_confirmation = "NeverPrompt",
 	warn_about_missing_glyphs = false,
 	front_end = "OpenGL",
 
-	-- Cursor
-	default_cursor_style = "BlinkingBlock",
-	cursor_blink_ease_in = "Constant",
-	cursor_blink_ease_out = "Constant",
-	cursor_blink_rate = 700,
-
-	-- Colorscheme
-	color_scheme = "Horizon Dark (base16)",
-	window_background_opacity = 0.5,
-
-	-- Keymap config
-	disable_default_key_bindings = true,
-	-- leader : <space>
-	leader = { key = " ", mods = "SHIFT", timeout_milliseconds = 2000 },
-	keys = require("keymapping"),
+	-- 字体
+	font_size = 14,
 }
 
--- Separate configuration
-if wezterm.target_triple == "x86_64-pc-windows-msvc" then
-	local win_config = require("win-conf")
-	config = merge_config(config, win_config)
-elseif wezterm.target_triple == "aarch64-apple-darwin" then
-	local mac_config = require("mac-conf")
-	config = merge_config(config, mac_config)
-end
-
--- Config events
-require("tab-events")
-
+local config = {}
+utils.merge_config(config, base_config, font_config, keys_config)
+events.setup_theme(config)
 return config
