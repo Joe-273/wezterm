@@ -1,0 +1,1 @@
+-- wezterm主题名称 与 neovim主题名称 的映射
